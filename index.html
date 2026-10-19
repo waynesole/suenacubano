@@ -179,6 +179,28 @@ header.scrolled{background:rgba(19,15,29,.78);backdrop-filter:blur(16px) saturat
 .tour span{font-size:13px;color:var(--muted)}
 .tour em{font-style:normal;font-weight:600;font-size:15px}
 .tour i{font-style:normal;font-size:12px;color:var(--coral);font-weight:700;margin-top:8px}
+.ev.feat{grid-column:1/-1;grid-template-columns:320px 1fr;border-color:rgba(247,201,72,.35);background:linear-gradient(120deg,rgba(247,201,72,.08),transparent 50%),var(--surface)}
+.ev.feat h3{font-size:clamp(28px,3.4vw,38px)}
+.ev-facts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ev-facts li{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;color:var(--muted)}
+.ev-facts b{display:block;color:var(--text);font:800 18px "Bricolage Grotesque"}
+.names{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.names span{font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;background:rgba(247,201,72,.1);border:1px solid rgba(247,201,72,.3);color:var(--sun-2)}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.vid.wide{grid-column:1/-1}
+.vid.wide video{aspect-ratio:16/9;max-height:620px}
+.vid{border-radius:20px;overflow:hidden;background:#000;border:1px solid var(--line);position:relative}
+.vid video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
+.vid figcaption{position:absolute;left:0;right:0;top:0;padding:14px 16px 30px;font-size:14px;font-weight:600;background:linear-gradient(180deg,rgba(0,0,0,.65),transparent);pointer-events:none}
+.rev-card{display:grid;grid-template-columns:auto 1.4fr 1fr;gap:36px;align-items:center;padding:clamp(24px,4vw,40px);border-radius:28px;background:var(--surface);border:1px solid var(--line-2)}
+.rev-score{text-align:center}
+.rev-score b{display:block;font:800 56px/1 "Bricolage Grotesque"}
+.stars{color:var(--sun);font-size:22px;letter-spacing:2px;margin:6px 0}
+.rev-score span{font-size:13px;color:var(--muted)}
+.rev-card blockquote p{font-size:18px;color:#e6dcef}
+.rev-card blockquote footer{margin-top:12px;color:var(--muted);font-size:14px}
+.rev-card blockquote footer b{color:var(--text)}
+.rev-cta p{color:var(--muted);font-size:15px;margin-bottom:14px}
 .fb-line{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 24px;border:1px dashed var(--line-2);border-radius:18px;color:var(--muted)}
 
 /* association */
@@ -289,6 +311,10 @@ footer.site{border-top:1px solid var(--line);padding:50px 0 34px;background:var(
   .tour{grid-template-columns:repeat(3,1fr)}
   .events{grid-template-columns:1fr}
   .intro-media{aspect-ratio:16/11}
+  .vgrid{grid-template-columns:repeat(3,1fr)}
+  .rev-card{grid-template-columns:1fr;text-align:left;gap:22px}
+  .rev-score{text-align:left}
+  .ev.feat{grid-template-columns:260px 1fr}
 }
 @media (max-width:640px){
   section{padding:76px 0}
@@ -297,7 +323,12 @@ footer.site{border-top:1px solid var(--line);padding:50px 0 34px;background:var(
   .dances{grid-template-columns:1fr}
   .slot{grid-template-columns:1fr;gap:6px;padding:18px}
   .slot .lvl{justify-self:start}
-  .ev{grid-template-columns:1fr}
+  .ev,.ev.feat{grid-template-columns:1fr}
+  .ev.feat .poster{aspect-ratio:3/4}
+  .ev-facts{grid-template-columns:1fr}
+  .vgrid{gap:10px;grid-template-columns:1fr 1fr}
+  .vgrid .vid:last-child{grid-column:1/-1}
+  .vgrid .vid:last-child video{aspect-ratio:4/5}
   .ev .poster{aspect-ratio:4/3}
   .ev .poster.typo{aspect-ratio:auto;padding:36px 20px}
   .tour{grid-template-columns:repeat(2,1fr)}
@@ -507,6 +538,21 @@ footer.site{border-top:1px solid var(--line);padding:50px 0 34px;background:var(
     <p class="lead rv d2">Soirées, stages, festivals et concerts : réservez directement en ligne sur HelloAsso.</p>
 
     <div class="events">
+      <article class="ev feat rv">
+        <div class="poster" data-lb="img/reveillon.jpg"><img src="img/reveillon.jpg" alt="Affiche Lo Mejor de Mí, le musical, réveillon du 31 décembre 2026" loading="lazy" style="object-position:top"></div>
+        <div class="info">
+          <span class="date">◆ Réveillon · 31 décembre 2026</span>
+          <h3>Lo Mejor de Mí — <span class="grad-text">le Musical</span></h3>
+          <p>Un voyage à travers l'histoire de la musique cubaine, inspiré de l'album de Mixael Cabrera, avec le Son cubain en vedette : orchestre live, danseurs et théâtre. Puis cocktail dînatoire et fiesta à El Solar Habanero jusqu'à 1h pour fêter la nouvelle année aux rythmes de Cuba.</p>
+          <ul class="ev-facts">
+            <li><b>20h</b> ouverture des portes</li>
+            <li><b>21h</b> spectacle</li>
+            <li><b>90 €</b> cocktail dînatoire, 1 coupe de champagne + 1 verre de vin</li>
+            <li><b>Le Chaudron</b> 15 av. Roland Dorgelès, Mérignac</li>
+          </ul>
+          <div class="actions"><a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/spectacle-musical-lo-mejor-de-mi-le-reveillon">Réserver mon réveillon</a><button class="btn btn-ghost btn-sm" data-lb="img/reveillon.jpg">Voir l'affiche</button></div>
+        </div>
+      </article>
       <article class="ev rv">
         <div class="poster" data-lb="img/alocubano.jpg"><img src="img/alocubano.jpg" alt="Affiche A lo Cubano" loading="lazy"></div>
         <div class="info">
@@ -559,11 +605,44 @@ footer.site{border-top:1px solid var(--line);padding:50px 0 34px;background:var(
     </div>
     <div class="team">
       <div class="team-card big rv"><img src="img/troupe.jpg" alt="La troupe Suena Cubano en costume" loading="lazy" style="object-position:center 35%">
-        <div class="t"><h3>La troupe</h3><p>Yané, Nina, Vanessa et Fella : des chorégraphies vibrantes de danses populaires et afro-cubaines pour enflammer vos événements. Une prestation ? <a href="#contact" style="color:var(--sun);font-weight:700">Écrivez-nous →</a></p></div></div>
+        <div class="t"><h3>La troupe</h3><p>Yané, Nina, Vanessa et Johanna : des chorégraphies vibrantes de danses populaires et afro-cubaines pour enflammer vos événements. Une prestation ? <a href="#contact" style="color:var(--sun);font-weight:700">Écrivez-nous →</a></p></div></div>
       <div class="team-card rv d1"><img src="img/c1.jpg" alt="Yané, professeure" loading="lazy">
         <div class="t"><h3>Yané</h3><p>Danseuse d'âme et de cœur, formée à La Havane, elle enseigne en France depuis plusieurs années.</p></div></div>
       <div class="team-card rv d2"><img src="img/benev.jpg" alt="Les bénévoles et adhérents" loading="lazy">
-        <div class="t"><h3>Les bénévoles</h3><p>Accueil, organisation, logistique : leur énergie rend tout possible. Merci à eux !</p></div></div>
+        <div class="t"><h3>L'Equipazo</h3><p>Nos bénévoles : accueil, organisation, logistique, leur énergie rend tout possible. ¡Gracias!</p>
+          <div class="names"><span>Stéph</span><span>Yasmine</span><span>María</span><span>Noemí</span><span>Paloma</span><span>Solène</span><span>Marc</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="videos" id="videos">
+  <div class="wrap">
+    <span class="eyebrow rv">En vidéo</span>
+    <h2 class="h2 rv d1">Ça bouge chez <span class="grad-text">Suena Cubano</span>.</h2>
+    <p class="lead rv d2">Un aperçu de nos cours, de nos spectacles et de l'énergie de Yané. Montez le son !</p>
+    <div class="vgrid">
+      <figure class="vid wide rv"><video src="video/spectacle.mp4" poster="video/spectacle.jpg" preload="none" playsinline controls></video><figcaption>Sur scène avec la troupe et les élèves</figcaption></figure>
+      <figure class="vid rv"><video src="video/yane-quais.mp4" poster="video/yane-quais.jpg" preload="none" playsinline controls></video><figcaption>Yané sur les quais de Bordeaux</figcaption></figure>
+      <figure class="vid rv d1"><video src="video/cours.mp4" poster="video/cours.jpg" preload="none" playsinline controls></video><figcaption>En plein cours</figcaption></figure>
+      <figure class="vid rv d2"><video src="video/mer.mp4" poster="video/mer.jpg" preload="none" playsinline controls></video><figcaption>En voyage avec les élèves</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section class="reviews" id="avis" style="padding-top:20px">
+  <div class="wrap">
+    <div class="rev-card rv">
+      <div class="rev-score"><b>5,0</b><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><span>Avis Google</span></div>
+      <blockquote>
+        <p>« Meilleure prof de danse que j'ai connu, merci Yané ! La joie, le soleil, la bonne humeur, le partage, la convivialité ! Pas de pression, on s'amuse et on apprend sa passion 😊 »</p>
+        <footer><b>Laetitia L.</b> · élève, avis Google</footer>
+      </blockquote>
+      <div class="rev-cta">
+        <p>Vous avez dansé avec nous ? Votre avis nous aide énormément.</p>
+        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.google.com/maps?cid=5755349315692620025">Laisser un avis Google</a>
+      </div>
     </div>
   </div>
 </section>
@@ -582,7 +661,7 @@ footer.site{border-top:1px solid var(--line);padding:50px 0 34px;background:var(
       <div class="tl rv"><b>Son</b><h4>La racine de la Salsa</h4><p>Né dans l'Oriente, modernisé à La Havane, il offre sa structure à la Salsa.</p></div>
       <div class="tl rv d1"><b>1959</b><h4>Cap sur New York</h4><p>Après la Révolution, New York devient le pôle de la musique d'inspiration cubaine.</p></div>
       <div class="tl rv d2"><b>1970</b><h4>Los Van Van</h4><p>Une sonorité typique et moderne, mêlant rythmes caribéens et influences new-yorkaises.</p></div>
-      <div class="tl rv d3"><b>Today</b><h4>Timba & Reggaeton</h4><p>La salsa évolue vers la timba, et le reggaeton devient le rythme le plus populaire de l'île.</p></div>
+      <div class="tl rv d3"><b>Today</b><h4>Timba & Reparto</h4><p>La salsa évolue vers la timba, et le reparto devient le rythme le plus populaire de l'île.</p></div>
     </div>
     <details class="more rv">
       <summary>Les danses afro-cubaines : une histoire de résistance</summary>
