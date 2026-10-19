@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suena Cubano</title>
+<meta name="description" content="Suena Cubano — association de danses cubaines à Bordeaux, Talence et Martignas depuis 2010 : Rumba, Salsa, Lady Style, danses afro-cubaines, stages et soirées.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#130f1d; --bg-2:#1a1528; --surface:#221b33; --surface-2:#2b2340;
+  --line:rgba(255,236,214,.10); --line-2:rgba(255,236,214,.18);
+  --text:#f6efe6; --muted:#b9adc4; --dim:#8a7f98;
+  --sun:#f7c948; --sun-2:#ffdf7e; --coral:#ff6b4a; --rose:#ff4f8b; --sea:#2ec4b6;
+  --grad:linear-gradient(120deg,var(--sun) 0%,var(--coral) 55%,var(--rose) 100%);
+  --radius:22px; --ease:cubic-bezier(.2,.8,.2,1);
+  --shadow:0 20px 50px -20px rgba(0,0,0,.7);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#130f1d; --text:#f6efe6; } }
+:root[data-theme="dark"]{ --bg:#130f1d; --text:#f6efe6; }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--bg);color:var(--text);font:400 16px/1.65 "DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.05;letter-spacing:-.02em;font-weight:800}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+section{position:relative;padding:110px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--grad);border-radius:2px}
+.h2{font-size:clamp(34px,5vw,58px);margin:14px 0 18px}
+.lead{color:var(--muted);font-size:clamp(16px,1.6vw,18px);max-width:640px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid transparent;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s;white-space:nowrap}
+.btn svg{width:18px;height:18px;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-primary{background:var(--grad);color:#1b1022;box-shadow:0 10px 30px -10px rgba(255,107,74,.65)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -12px rgba(255,107,74,.8)}
+.btn-ghost{background:rgba(255,255,255,.06);border-color:var(--line-2);color:var(--text);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.btn-sm{padding:10px 16px;font-size:14px}
+
+/* header */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,border-color .4s,padding .4s;border-bottom:1px solid transparent;padding:18px 0}
+header.scrolled{background:rgba(19,15,29,.78);backdrop-filter:blur(16px) saturate(1.4);border-color:var(--line);padding:10px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-family:"Bricolage Grotesque";font-weight:800;font-size:20px}
+.brand img{width:44px;height:44px;border-radius:12px;object-fit:cover;background:#fff}
+.brand small{display:block;font:500 12px "DM Sans";color:var(--muted);letter-spacing:.02em}
+.menu{display:flex;gap:4px;list-style:none}
+.menu a{padding:9px 14px;border-radius:999px;font-weight:500;font-size:15px;color:var(--muted);transition:color .25s,background .25s}
+.menu a:hover,.menu a.active{color:var(--text);background:rgba(255,255,255,.07)}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;place-items:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;position:relative;transition:.3s var(--ease)}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.open .burger span{background:transparent}
+.open .burger span::before{top:0;transform:rotate(45deg)}
+.open .burger span::after{top:0;transform:rotate(-45deg)}
+
+/* hero */
+.hero{min-height:100svh;display:flex;align-items:flex-end;padding:140px 0 80px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-1}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.08);animation:kb 18s ease-out forwards}
+@keyframes kb{to{transform:scale(1)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(80% 60% at 85% 10%,rgba(255,79,139,.28),transparent 60%),
+  radial-gradient(60% 50% at 0% 100%,rgba(247,201,72,.18),transparent 60%),
+  linear-gradient(180deg,rgba(19,15,29,.55) 0%,rgba(19,15,29,.35) 35%,rgba(19,15,29,.92) 80%,var(--bg) 100%)}
+.hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:40px;align-items:end}
+.hero h1{font-size:clamp(46px,8.4vw,112px);margin:18px 0 22px;letter-spacing:-.035em}
+.hero h1 em{font-style:normal}
+.hero p{font-size:clamp(17px,1.8vw,20px);color:#e6dcef;max-width:560px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line-2);backdrop-filter:blur(10px);font-size:13px;font-weight:500}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--sea);box-shadow:0 0 0 0 rgba(46,196,182,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(46,196,182,0)}100%{box-shadow:0 0 0 0 rgba(46,196,182,0)}}
+.next-card{background:rgba(34,27,51,.72);backdrop-filter:blur(18px) saturate(1.3);border:1px solid var(--line-2);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center}
+.next-card img{width:96px;height:96px;border-radius:14px;object-fit:cover}
+.next-card .tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sun)}
+.next-card h3{font-size:22px;margin:6px 0 4px}
+.next-card p{font-size:14px;color:var(--muted)}
+.countdown{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.countdown div{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;text-align:center;padding:10px 4px}
+.countdown b{display:block;font:800 24px "Bricolage Grotesque";font-variant-numeric:tabular-nums}
+.countdown span{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.next-card .btn{grid-column:1/-1;justify-content:center}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);background:var(--bg-2);overflow:hidden;padding:20px 0}
+.track{display:flex;gap:48px;width:max-content;animation:scroll 38s linear infinite}
+.track span{font:700 clamp(22px,3vw,34px) "Bricolage Grotesque";color:var(--muted);display:flex;align-items:center;gap:48px;white-space:nowrap}
+.track span::after{content:"✦";color:var(--sun);font-size:.7em}
+.track span:nth-child(3n+2){color:var(--text)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.stat b{display:block;font:800 clamp(36px,4.4vw,52px) "Bricolage Grotesque";line-height:1}
+.stat span{color:var(--muted);font-size:15px}
+.intro-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+.intro-media{position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--shadow)}
+.intro-media img{width:100%;height:100%;object-fit:cover}
+.intro-media .badge{position:absolute;left:18px;bottom:18px;right:18px;background:rgba(19,15,29,.7);backdrop-filter:blur(12px);border:1px solid var(--line-2);border-radius:16px;padding:16px 18px;font-size:15px}
+.intro-media .badge b{color:var(--sun)}
+
+/* dances */
+.dances{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:52px}
+.dance{grid-column:span 2;position:relative;border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--line);min-height:440px;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;transition:transform .5s var(--ease),border-color .4s}
+.dance:nth-child(4),.dance:nth-child(5){grid-column:span 3}
+.dance img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1s var(--ease)}
+.dance::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(19,15,29,0) 20%,rgba(19,15,29,.75) 55%,rgba(19,15,29,.97) 100%)}
+.dance:hover{transform:translateY(-6px);border-color:var(--line-2)}
+.dance:hover img{transform:scale(1.07)}
+.dance .body{padding:26px}
+.dance .num{font:700 13px "DM Sans";color:var(--sun);letter-spacing:.14em}
+.dance h3{font-size:30px;margin:8px 0 10px}
+.dance p{color:#d9cfe2;font-size:15px}
+.dance .note{margin-top:12px;font-size:13px;color:var(--muted);padding-left:12px;border-left:2px solid var(--coral)}
+
+/* planning */
+.planning{background:var(--bg-2)}
+.planning::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 50% at 100% 0%,rgba(247,201,72,.10),transparent 70%),radial-gradient(40% 40% at 0% 100%,rgba(255,79,139,.10),transparent 70%);pointer-events:none}
+.plan-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;margin:40px 0 28px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tab{border:0;background:transparent;color:var(--muted);font:600 15px "DM Sans";padding:11px 20px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:.3s var(--ease)}
+.tab small{display:block;font-size:11px;font-weight:500;opacity:.75}
+.tab[aria-selected="true"]{background:var(--text);color:#1b1022}
+.panel{display:none;grid-template-columns:.9fr 1.3fr;gap:24px;animation:fade .5s var(--ease)}
+.panel.on{display:grid}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+.place{background:var(--grad);color:#1b1022;border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;justify-content:space-between;min-height:280px;position:relative;overflow:hidden}
+.place::after{content:"★";position:absolute;right:-20px;bottom:-60px;font-size:240px;line-height:1;opacity:.13}
+.place .day{font:800 clamp(40px,5vw,60px) "Bricolage Grotesque";line-height:.95}
+.place .addr{font-weight:700;font-size:16px;margin-top:10px}
+.place .city{font-size:14px;font-weight:500;opacity:.8}
+.place .btn{background:#1b1022;color:var(--text);align-self:flex-start;margin-top:22px}
+.slots{display:flex;flex-direction:column;gap:12px}
+.slot{display:grid;grid-template-columns:86px 1fr auto;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 22px;transition:border-color .3s,transform .3s var(--ease)}
+.slot:hover{border-color:var(--line-2);transform:translateX(4px)}
+.slot time{font:800 24px "Bricolage Grotesque";color:var(--sun)}
+.slot h4{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.slot .sub{color:var(--muted);font-size:14px}
+.trims{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.trims div{font-size:15px}
+.trims b{display:inline-block;min-width:60px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.lvl{font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;white-space:nowrap;border:1px solid}
+.lvl.deb{color:var(--sea);border-color:rgba(46,196,182,.4);background:rgba(46,196,182,.08)}
+.lvl.evo{color:var(--sun);border-color:rgba(247,201,72,.4);background:rgba(247,201,72,.08)}
+.lvl.req{color:var(--rose);border-color:rgba(255,79,139,.4);background:rgba(255,79,139,.08)}
+.lvl.all{color:var(--text);border-color:var(--line-2);background:rgba(255,255,255,.05)}
+
+/* events */
+.events{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:52px}
+.ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;grid-template-columns:200px 1fr;transition:transform .45s var(--ease),border-color .3s}
+.ev:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.ev .poster{position:relative;cursor:zoom-in;overflow:hidden;background:#000}
+.ev .poster img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.ev:hover .poster img{transform:scale(1.05)}
+.ev .poster.typo{background:var(--grad);display:grid;place-items:center;cursor:default;color:#1b1022;text-align:center;padding:20px;font:800 34px/0.95 "Bricolage Grotesque"}
+.ev .poster.typo small{display:block;font:600 13px "DM Sans";margin-top:10px;letter-spacing:.1em;text-transform:uppercase}
+.ev .info{padding:24px;display:flex;flex-direction:column;gap:12px}
+.ev .date{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:700;color:var(--sun);letter-spacing:.06em;text-transform:uppercase}
+.ev h3{font-size:26px}
+.ev p{color:var(--muted);font-size:15px}
+.ev .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.ev.wide{grid-column:1/-1;grid-template-columns:1fr}
+.tour{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:6px}
+.tour a{background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:16px;transition:.3s var(--ease);display:flex;flex-direction:column;gap:2px}
+.tour a:hover{border-color:var(--coral);transform:translateY(-3px);background:var(--surface-2)}
+.tour b{font:800 28px "Bricolage Grotesque"}
+.tour span{font-size:13px;color:var(--muted)}
+.tour em{font-style:normal;font-weight:600;font-size:15px}
+.tour i{font-style:normal;font-size:12px;color:var(--coral);font-weight:700;margin-top:8px}
+.fb-line{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 24px;border:1px dashed var(--line-2);border-radius:18px;color:var(--muted)}
+
+/* association */
+.asso-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.quote{margin-top:30px;padding:28px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);position:relative}
+.quote::before{content:"“";position:absolute;top:-28px;left:18px;font:800 110px/1 "Bricolage Grotesque";background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.quote p{font-size:17px;color:#e6dcef}
+.quote footer{display:flex;align-items:center;gap:14px;margin-top:18px}
+.quote footer img{width:52px;height:52px;border-radius:50%;object-fit:cover;filter:grayscale(.2)}
+.quote footer b{display:block}
+.quote footer span{font-size:14px;color:var(--muted)}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.team-card{border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--line)}
+.team-card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .8s var(--ease)}
+.team-card:hover img{transform:scale(1.04)}
+.team-card .t{padding:20px}
+.team-card h3{font-size:22px;margin-bottom:6px}
+.team-card p{color:var(--muted);font-size:14.5px}
+.team-card.big{grid-column:1/-1}
+.team-card.big img{aspect-ratio:16/8}
+
+/* history */
+.history{background:var(--bg-2)}
+.timeline{margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tl{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;position:relative;overflow:hidden}
+.tl b{font:800 34px "Bricolage Grotesque";display:block;margin-bottom:8px}
+.tl:nth-child(4n+1) b{color:var(--sun)}.tl:nth-child(4n+2) b{color:var(--coral)}.tl:nth-child(4n+3) b{color:var(--rose)}.tl:nth-child(4n) b{color:var(--sea)}
+.tl h4{font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+.tl p{color:var(--muted);font-size:14.5px}
+details.more{margin-top:24px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+details.more summary{cursor:pointer;list-style:none;padding:18px 24px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-size:24px;color:var(--sun);transition:transform .3s}
+details.more[open] summary::after{transform:rotate(45deg)}
+details.more .txt{padding:0 24px 24px;color:var(--muted);columns:2 320px;column-gap:40px}
+details.more .txt p{margin-bottom:14px;break-inside:avoid}
+
+/* inscriptions */
+.signup{border-radius:32px;padding:clamp(28px,5vw,64px);background:
+  radial-gradient(70% 90% at 100% 0%,rgba(255,79,139,.35),transparent 60%),
+  radial-gradient(60% 80% at 0% 100%,rgba(247,201,72,.28),transparent 60%),var(--surface);
+  border:1px solid var(--line-2);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;overflow:hidden}
+.signup h2{font-size:clamp(34px,5vw,60px)}
+.signup p{color:#e3d8ec;margin-top:14px;max-width:520px}
+.sign-opts{display:flex;flex-direction:column;gap:12px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 22px;border-radius:18px;background:rgba(19,15,29,.6);border:1px solid var(--line-2);backdrop-filter:blur(8px);transition:.35s var(--ease)}
+.opt:hover{transform:translateX(6px);border-color:var(--sun);background:rgba(19,15,29,.8)}
+.opt b{font:700 19px "Bricolage Grotesque";display:block}
+.opt span{font-size:14px;color:var(--muted)}
+.opt .arr{flex:none;width:42px;height:42px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#1b1022}
+.opt .arr svg{width:18px;height:18px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;margin-top:10px}
+.cinfo{display:flex;flex-direction:column;gap:12px;margin-top:30px}
+.cinfo a,.cinfo div{display:flex;gap:16px;align-items:center;padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:18px;transition:.3s var(--ease)}
+.cinfo a:hover{border-color:var(--line-2);transform:translateX(4px)}
+.ico{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(247,201,72,.12);color:var(--sun)}
+.ico svg{width:20px;height:20px}
+.cinfo small{display:block;color:var(--dim);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.socials{display:flex;gap:10px;margin-top:6px}
+.socials a{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);transition:.3s var(--ease)}
+.socials a:hover{background:var(--grad);color:#1b1022;transform:translateY(-3px)}
+.socials svg{width:20px;height:20px}
+form{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(22px,4vw,36px);display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form h3{grid-column:1/-1;font-size:26px}
+form .full{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:15px;color:var(--text);background:var(--bg-2);border:1px solid var(--line-2);border-radius:14px;padding:13px 15px;outline:none;transition:border-color .25s,box-shadow .25s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--sun);box-shadow:0 0 0 4px rgba(247,201,72,.15)}
+textarea{min-height:120px;resize:vertical}
+form .btn{grid-column:1/-1;justify-content:center}
+form .hint{grid-column:1/-1;font-size:13px;color:var(--dim);text-align:center}
+
+footer.site{border-top:1px solid var(--line);padding:50px 0 34px;background:var(--bg-2)}
+.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center}
+.foot nav{display:flex;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:15px}
+.foot nav a:hover{color:var(--text)}
+.copy{margin-top:30px;color:var(--dim);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,7,16,.92);backdrop-filter:blur(10px);display:none;place-items:center;padding:24px;cursor:zoom-out}
+.lb.on{display:grid;animation:fade .3s}
+.lb img{max-height:88vh;max-width:min(92vw,900px);border-radius:16px;box-shadow:var(--shadow)}
+.lb .row{display:flex;gap:12px;overflow-x:auto;max-width:100%}
+.lb .row img{max-height:84vh}
+
+/* mobile sticky CTA */
+.mcta{display:none}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+
+@media (max-width:1020px){
+  .menu,.nav-cta .btn{display:none}
+  .burger{display:grid}
+  .open .menu{display:flex;position:fixed;top:72px;left:16px;right:16px;flex-direction:column;background:rgba(26,21,40,.97);backdrop-filter:blur(16px);border:1px solid var(--line-2);border-radius:20px;padding:12px;box-shadow:var(--shadow)}
+  .open .menu a{display:block;padding:14px 16px;font-size:17px}
+  .hero-grid,.intro-grid,.asso-grid,.contact-grid,.signup{grid-template-columns:1fr}
+  .next-card{max-width:520px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .dance,.dance:nth-child(4),.dance:nth-child(5){grid-column:span 3}
+  .panel{grid-template-columns:1fr}
+  .place{min-height:0}
+  .timeline{grid-template-columns:repeat(2,1fr)}
+  .tour{grid-template-columns:repeat(3,1fr)}
+  .events{grid-template-columns:1fr}
+  .intro-media{aspect-ratio:16/11}
+}
+@media (max-width:640px){
+  section{padding:76px 0}
+  .hero{padding:120px 0 60px}
+  .dance,.dance:nth-child(4),.dance:nth-child(5){grid-column:1/-1;min-height:400px}
+  .dances{grid-template-columns:1fr}
+  .slot{grid-template-columns:1fr;gap:6px;padding:18px}
+  .slot .lvl{justify-self:start}
+  .ev{grid-template-columns:1fr}
+  .ev .poster{aspect-ratio:4/3}
+  .ev .poster.typo{aspect-ratio:auto;padding:36px 20px}
+  .tour{grid-template-columns:repeat(2,1fr)}
+  .timeline{grid-template-columns:1fr}
+  .team{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  .stat{padding:20px}
+  .mcta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;gap:8px;transform:translateY(120%);transition:transform .45s var(--ease)}
+  .mcta.on{transform:none}
+  .mcta .btn{flex:1;justify-content:center;padding:14px 10px}
+  footer.site{padding-bottom:100px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#accueil" class="brand"><img src="img/logo.jpg" alt="Logo Suena Cubano"><span>Suena Cubano<small>Danses cubaines · Bordeaux</small></span></a>
+    <ul class="menu" id="menu">
+      <li><a href="#cours">Les cours</a></li>
+      <li><a href="#planning">Planning</a></li>
+      <li><a href="#evenements">Événements</a></li>
+      <li><a href="#association">L'association</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="#inscriptions">S'inscrire</a>
+      <button class="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-bg"><img src="img/dsc.jpg" alt="Soirée Suena Cubano, piste de danse pleine"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill rv"><span class="dot"></span> Inscriptions 2026-2027 ouvertes</span>
+      <h1 class="rv d1">Vivez Cuba,<br><em class="grad-text">en dansant.</em></h1>
+      <p class="rv d2">Rumba, salsa afro, Lady Style, danses afro-cubaines… Depuis 2010, Suena Cubano partage le côté festif et sensuel de Cuba à Bordeaux, Talence et Martignas.</p>
+      <div class="ctas rv d3">
+        <a class="btn btn-primary" href="#inscriptions">Je m'inscris <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#planning">Voir le planning</a>
+      </div>
+    </div>
+    <aside class="next-card rv d2" aria-label="Prochain événement">
+      <img src="img/alocubano.jpg" alt="Affiche Fin de semana A lo Cubano">
+      <div>
+        <span class="tag">Prochain rendez-vous</span>
+        <h3>A lo Cubano</h3>
+        <p>Sam. 31 oct. · Château de Thouars, Talence</p>
+      </div>
+      <div class="countdown" id="cd">
+        <div><b data-u="d">--</b><span>jours</span></div>
+        <div><b data-u="h">--</b><span>heures</span></div>
+        <div><b data-u="m">--</b><span>min</span></div>
+        <div><b data-u="s">--</b><span>sec</span></div>
+      </div>
+      <a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/fin-de-semana-a-lo-cubano-le-31-octobre-2026">Réserver ma place</a>
+    </aside>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Rumba cubaine</span><span>Salsa afro rumba</span><span>Lady Style</span><span>Danses afro-cubaines</span><span>Son cubain</span><span>Atelier chorégraphique</span>
+    <span>Rumba cubaine</span><span>Salsa afro rumba</span><span>Lady Style</span><span>Danses afro-cubaines</span><span>Son cubain</span><span>Atelier chorégraphique</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section>
+  <div class="wrap">
+    <div class="intro-grid">
+      <div>
+        <span class="eyebrow rv">Une culture, une association, une passion</span>
+        <h2 class="h2 rv d1">Bien plus qu'un cours de danse : <span class="grad-text">un voyage.</span></h2>
+        <p class="lead rv d2">Chaque cours, chaque soirée est un moment de partage où l'on s'imprègne d'une culture riche et émouvante. Ici, pas besoin d'être danseur : il suffit de réveiller la joie de vivre qui dort en vous.</p>
+        <div class="stats">
+          <div class="stat rv"><b class="grad-text" data-count="2010">2010</b><span>année de création</span></div>
+          <div class="stat rv d1"><b data-count="6">6</b><span>styles enseignés</span></div>
+          <div class="stat rv d2"><b data-count="3">3</b><span>villes : Bordeaux, Talence, Martignas</span></div>
+          <div class="stat rv d3"><b>100%</b><span>cubain, de la rue au Conjunto Folklórico</span></div>
+        </div>
+      </div>
+      <div class="intro-media rv d2">
+        <img src="img/c2.jpg" alt="Cours de rumba cubaine avec jupes colorées" loading="lazy">
+        <div class="badge">Jupes et foulards <b>fournis</b> pour la rumba — venez comme vous êtes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURS -->
+<section id="cours" style="padding-top:20px">
+  <div class="wrap">
+    <span class="eyebrow rv">Les danses enseignées</span>
+    <h2 class="h2 rv d1">Trouvez votre rythme.</h2>
+    <p class="lead rv d2">Du sacré au festif, du solo au couple : cinq univers pour découvrir toutes les facettes de la danse cubaine.</p>
+    <div class="dances">
+      <article class="dance rv">
+        <img src="img/c5.jpg" alt="" loading="lazy">
+        <div class="body"><span class="num">01</span><h3>Rumba cubaine</h3>
+          <p>Elle exprime de manière authentique l'image de la vie quotidienne.</p>
+          <p class="note">Dansée avec longues jupes ou foulards : il y en aura à votre disposition.</p></div>
+      </article>
+      <article class="dance rv d1">
+        <img src="img/c3.jpg" alt="" loading="lazy">
+        <div class="body"><span class="num">02</span><h3>Salsa afro rumba</h3>
+          <p>Lâcher prise et affiner son style. Travail en couple et en solo, pour approfondir le style cubain plutôt qu'enchaîner les figures.</p></div>
+      </article>
+      <article class="dance rv d2">
+        <img src="img/h6.jpg" alt="" loading="lazy">
+        <div class="body"><span class="num">03</span><h3>Lady Style</h3>
+          <p>Des mouvements en solo qui mettent la féminité à l'honneur.</p>
+          <p class="note">Tout ce que vous y travaillez se replace dans la salsa en couple !</p></div>
+      </article>
+      <article class="dance rv">
+        <img src="img/h5.jpg" alt="" loading="lazy" style="object-position:center 20%">
+        <div class="body"><span class="num">04</span><h3>Danses afro-cubaines</h3>
+          <p>Danses sacrées aux racines africaines (danses Yorubas). Amour, sensualité, colère, paix, guerre : une histoire racontée à travers les Orishas.</p></div>
+      </article>
+      <article class="dance rv d1">
+        <img src="img/hero.jpg" alt="" loading="lazy" style="object-position:center 25%">
+        <div class="body"><span class="num">05</span><h3>Atelier chorégraphique</h3>
+          <p>Chorégraphies sur rythmes cubains et comparsas festives et ensoleillées, toute l'année.</p>
+          <p class="note">Les élèves peuvent les présenter lors de nos soirées.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PLANNING -->
+<section class="planning" id="planning">
+  <div class="wrap" style="position:relative">
+    <div class="plan-head">
+      <div>
+        <span class="eyebrow rv">Saison 2026 – 2027</span>
+        <h2 class="h2 rv d1">Le planning des cours</h2>
+      </div>
+      <a class="btn btn-ghost rv" href="#inscriptions">Modalités d'inscription</a>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-t="bdx">Bordeaux<small>mercredi</small></button>
+      <button class="tab" role="tab" aria-selected="false" data-t="tal">Talence<small>jeudi</small></button>
+      <button class="tab" role="tab" aria-selected="false" data-t="mar">Martignas<small>lundi</small></button>
+      <button class="tab" role="tab" aria-selected="false" data-t="stg">Stages<small>vendredi</small></button>
+    </div>
+
+    <div class="panel on" id="p-bdx">
+      <div class="place"><div><div class="city">Bordeaux</div><div class="day">Les<br>mercredis</div><div class="addr">Studio A — 21 rue Edmond Labasse</div></div>
+        <a class="btn btn-sm" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/inscription-2026-2027-bordeaux">S'inscrire à Bordeaux</a></div>
+      <div class="slots">
+        <div class="slot"><time>18h45</time><div><h4>Lady Style</h4><div class="sub">Débutant</div></div><span class="lvl req">Pas de base salsa acquis</span></div>
+        <div class="slot"><time>19h50</time><div><h4>Lady Style</h4><div class="sub">Suite du parcours</div></div><span class="lvl evo">Niveau évolutif</span></div>
+        <div class="slot"><time>21h00</time><div><h4>Cycle trimestriel</h4><div class="trims">
+          <div><b>Trim. 1</b>Rumba cubaine</div><div><b>Trim. 2</b>Danses afro-cubaines</div><div><b>Trim. 3</b>Salsa con afro rumba</div></div></div><span class="lvl deb">Débutant</span></div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-tal">
+      <div class="place"><div><div class="city">Talence</div><div class="day">Les<br>jeudis</div><div class="addr">Jardin de Cauderès — rue du Colonel Moll</div></div>
+        <a class="btn btn-sm" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/inscription-2026-2027-talence">S'inscrire à Talence</a></div>
+      <div class="slots">
+        <div class="slot"><time>19h00</time><div><h4>Atelier chorégraphique Lady Style</h4><div class="sub">Son cubain, rumba cubaine et danses latines</div></div><span class="lvl all">Atelier</span></div>
+        <div class="slot"><time>20h00</time><div><h4>Danses afro-cubaines</h4><div class="sub">Orishas & rythmes sacrés</div></div><span class="lvl evo">Niveau évolutif</span></div>
+        <div class="slot"><time>21h00</time><div><h4>Cycle trimestriel</h4><div class="trims">
+          <div><b>Trim. 1</b>Rumba cubaine</div><div><b>Trim. 2</b>Danses afro-cubaines</div><div><b>Trim. 3</b>Salsa con afro rumba</div></div></div><span class="lvl deb">Débutant</span></div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-mar">
+      <div class="place"><div><div class="city">Martignas-sur-Jalle</div><div class="day">Les<br>lundis</div><div class="addr">Infos & inscription par mail ou téléphone</div></div>
+        <a class="btn btn-sm" href="#contact">Nous contacter</a></div>
+      <div class="slots">
+        <div class="slot"><time>19h00</time><div><h4>Salsa cubaine</h4><div class="sub">Niveau 1</div></div><span class="lvl deb">Niveau 1</span></div>
+        <div class="slot"><time>20h00</time><div><h4>Son cubain</h4><div class="sub">La racine de la salsa</div></div><span class="lvl deb">Débutant</span></div>
+        <div class="slot"><time>21h00</time><div><h4>Salsa cubaine</h4><div class="sub">Niveau 2</div></div><span class="lvl evo">Niveau 2</span></div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-stg">
+      <div class="place"><div><div class="city">Talence</div><div class="day">Un vendredi<br>par mois</div><div class="addr">Stages réguliers</div></div>
+        <a class="btn btn-sm" href="#evenements">Voir les dates</a></div>
+      <div class="slots">
+        <div class="slot"><time>★</time><div><h4>Rumba cubaine</h4><div class="sub">Pour aller plus loin</div></div><span class="lvl evo">Intermédiaire</span></div>
+        <div class="slot"><time>★</time><div><h4>Son cubain</h4><div class="sub">Élégance et cadence</div></div><span class="lvl all">Tous niveaux</span></div>
+        <div class="slot"><time>★</time><div><h4>Salsa couple</h4><div class="sub">Guidage et complicité</div></div><span class="lvl all">Tous niveaux</span></div>
+        <div class="slot"><time>★</time><div><h4>Lady Style</h4><div class="sub">Style et féminité</div></div><span class="lvl all">Tous niveaux</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENEMENTS -->
+<section id="evenements">
+  <div class="wrap">
+    <span class="eyebrow rv">Stages & événements</span>
+    <h2 class="h2 rv d1">L'agenda <span class="grad-text">caliente</span>.</h2>
+    <p class="lead rv d2">Soirées, stages, festivals et concerts : réservez directement en ligne sur HelloAsso.</p>
+
+    <div class="events">
+      <article class="ev rv">
+        <div class="poster" data-lb="img/alocubano.jpg"><img src="img/alocubano.jpg" alt="Affiche A lo Cubano" loading="lazy"></div>
+        <div class="info">
+          <span class="date">◆ Samedi 31 octobre 2026</span>
+          <h3>Fin de semana A lo Cubano</h3>
+          <p>Avec Yané, Keke et DJ Lolo. Stages de son cubain et rueda de casino, repas cubain et soirée dansante au Château de Thouars, Talence.</p>
+          <div class="actions"><a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/fin-de-semana-a-lo-cubano-le-31-octobre-2026">Réserver</a><button class="btn btn-ghost btn-sm" data-lb="img/alocubano.jpg">Tarifs & programme</button></div>
+        </div>
+      </article>
+      <article class="ev rv d1">
+        <div class="poster" data-lb="img/ev1.jpg,img/ev5.jpg,img/ev4.jpg,img/ev2.jpg"><img src="img/ev1.jpg" alt="Affiche Festival El Son se Viste de Gala" loading="lazy" style="object-position:top"></div>
+        <div class="info">
+          <span class="date">◆ 13 → 15 novembre 2026</span>
+          <h3>Festival El Son se Viste de Gala</h3>
+          <p>Avec Mixael Cabrera à Santa Susanna (Espagne). Workshops, concerts et Yané au line-up.</p>
+          <div class="actions"><a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/festival-el-son-se-viste-de-gala">Réserver</a><button class="btn btn-ghost btn-sm" data-lb="img/ev1.jpg,img/ev5.jpg,img/ev4.jpg,img/ev2.jpg">Programme</button></div>
+        </div>
+      </article>
+      <article class="ev wide rv">
+        <div class="info">
+          <span class="date">◆ Tournée · novembre 2026</span>
+          <h3>Fresto en France — <span class="grad-text">El sonero del amor</span></h3>
+          <p>Cinq dates de concert, choisissez la vôtre :</p>
+          <div class="tour">
+            <a target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/concert-de-fresto-a-pau"><b>19</b><span>novembre</span><em>Pau (64)</em><i>Réserver →</i></a>
+            <a target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/concert-de-fresto-a-alairac-20-min-de-carcassonne"><b>20</b><span>novembre</span><em>Alairac (11)</em><i>Réserver →</i></a>
+            <a target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/concert-de-fresto-a-angouleme"><b>21</b><span>novembre</span><em>Angoulême (16)</em><i>Réserver →</i></a>
+            <a target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/concert-fresto-el-sonero-del-amor"><b>22</b><span>novembre</span><em>Mérignac (33)</em><i>Réserver →</i></a>
+            <a target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/concert-de-fresto-a-montpellier-perols"><b>26</b><span>novembre</span><em>Montpellier (34)</em><i>Réserver →</i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="fb-line rv"><span>Tous nos événements sont aussi annoncés sur nos réseaux.</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=100057338744430">Facebook</a><a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.instagram.com/suena_cubano/">Instagram</a></div></div>
+  </div>
+</section>
+
+<!-- ASSOCIATION -->
+<section id="association" style="padding-top:40px">
+  <div class="wrap asso-grid">
+    <div>
+      <span class="eyebrow rv">L'association</span>
+      <h2 class="h2 rv d1">Le partage d'une culture.</h2>
+      <p class="lead rv d2">Suena Cubano est une association loi 1901 fondée en 2010 par des passionnés de la culture cubaine. Notre envie : faire vivre le côté festif et sensuel de Cuba à travers la danse, la musique et les voyages.</p>
+      <blockquote class="quote rv d3">
+        <p>Ma première école a été la rue. Je me suis formée auprès du Conjunto Folklórico Nacional de La Havane pour transmettre mon énergie, avec la certitude que tout le monde a de la joie de vivre dans son cœur… et que parfois, il suffit juste de la réveiller !</p>
+        <footer><img src="img/c1.jpg" alt="Yané"><div><b>Yané</b><span>Professeure de danse, Suena Cubano</span></div></footer>
+      </blockquote>
+    </div>
+    <div class="team">
+      <div class="team-card big rv"><img src="img/troupe.jpg" alt="La troupe Suena Cubano en costume" loading="lazy" style="object-position:center 35%">
+        <div class="t"><h3>La troupe</h3><p>Yané, Nina, Vanessa et Fella : des chorégraphies vibrantes de danses populaires et afro-cubaines pour enflammer vos événements. Une prestation ? <a href="#contact" style="color:var(--sun);font-weight:700">Écrivez-nous →</a></p></div></div>
+      <div class="team-card rv d1"><img src="img/c1.jpg" alt="Yané, professeure" loading="lazy">
+        <div class="t"><h3>Yané</h3><p>Danseuse d'âme et de cœur, formée à La Havane, elle enseigne en France depuis plusieurs années.</p></div></div>
+      <div class="team-card rv d2"><img src="img/benev.jpg" alt="Les bénévoles et adhérents" loading="lazy">
+        <div class="t"><h3>Les bénévoles</h3><p>Accueil, organisation, logistique : leur énergie rend tout possible. Merci à eux !</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTOIRE -->
+<section class="history">
+  <div class="wrap">
+    <span class="eyebrow rv">Cuba, un peu d'histoire</span>
+    <h2 class="h2 rv d1">À Cuba, on parle en chantant<br>et on marche en dansant.</h2>
+    <p class="lead rv d2">Point de rencontre des cultures européennes, africaines et nord-américaines, Cuba a donné au monde certains de ses plus grands rythmes.</p>
+    <div class="timeline">
+      <div class="tl rv"><b>XVIᵉ</b><h4>Naissance du Créole</h4><p>Symbole de la nationalité cubaine, il fait front aux Espagnols et invente sa propre identité.</p></div>
+      <div class="tl rv d1"><b>1900</b><h4>Le Boléro</h4><p>« Dos Gardenias » d'Isolina Carrillo, repris des décennies plus tard par le Buena Vista Social Club.</p></div>
+      <div class="tl rv d2"><b>1950</b><h4>Cha cha cha & Mambo</h4><p>Enrique Jorrín lance « La engañadora », puis Pérez Prado met le Mambo en lumière.</p></div>
+      <div class="tl rv d3"><b>1950s</b><h4>Benny Moré</h4><p>« El Bárbaro del Ritmo », le plus grand interprète cubain : boléros, sons et mambos.</p></div>
+      <div class="tl rv"><b>Son</b><h4>La racine de la Salsa</h4><p>Né dans l'Oriente, modernisé à La Havane, il offre sa structure à la Salsa.</p></div>
+      <div class="tl rv d1"><b>1959</b><h4>Cap sur New York</h4><p>Après la Révolution, New York devient le pôle de la musique d'inspiration cubaine.</p></div>
+      <div class="tl rv d2"><b>1970</b><h4>Los Van Van</h4><p>Une sonorité typique et moderne, mêlant rythmes caribéens et influences new-yorkaises.</p></div>
+      <div class="tl rv d3"><b>Today</b><h4>Timba & Reggaeton</h4><p>La salsa évolue vers la timba, et le reggaeton devient le rythme le plus populaire de l'île.</p></div>
+    </div>
+    <details class="more rv">
+      <summary>Les danses afro-cubaines : une histoire de résistance</summary>
+      <div class="txt">
+        <p>Il est impossible de parler des danses cubaines sans parler des danses afro-cubaines, traditionnelles et puisant leurs racines en Afrique. Appelées danses Yorubas à Cuba, Candomblé au Brésil ou Vaudou à Haïti, elles montrent tous les aspects de la vie quotidienne.</p>
+        <p>Chaque divinité — chaque Orisha — possède une couleur, une façon de danser, une histoire… qui sera racontée avec nos corps.</p>
+        <p>Les esclaves arrivés à Cuba ont amené avec eux leurs cultures, leurs traditions et leurs rythmes. Leur religion étant interdite, ils ont trouvé dans les saints catholiques des équivalents à leurs divinités : ils continuaient ainsi d'adorer les leurs, quand tout le monde croyait qu'ils priaient les saints de l'Église.</p>
+        <p>Les Cubains ont conservé la base de ces rythmes africains et y ont ajouté leur culture et leur façon de danser. C'est cet héritage que nous transmettons en cours.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- INSCRIPTIONS -->
+<section id="inscriptions">
+  <div class="wrap">
+    <div class="signup rv">
+      <div>
+        <span class="eyebrow">Inscriptions 2026 – 2027</span>
+        <h2 style="margin-top:14px">Rejoignez<br>la <span class="grad-text">familia</span>.</h2>
+        <p>Inscription en ligne en 2 minutes sur HelloAsso, ou fiche papier à télécharger. Une équipe pédagogue et dévouée vous attend, quel que soit votre niveau.</p>
+      </div>
+      <div class="sign-opts">
+        <a class="opt" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/inscription-2026-2027-bordeaux"><div><b>Bordeaux</b><span>Mercredis · Studio A · HelloAsso</span></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="opt" target="_blank" rel="noopener" href="https://www.helloasso.com/associations/suena-cubano/evenements/inscription-2026-2027-talence"><div><b>Talence</b><span>Jeudis · Jardin de Cauderès · HelloAsso</span></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="opt" target="_blank" rel="noopener" href="https://suenacubano.sitew.fr/dl/Root/gq2du-Fiche-d-inscription-2026-2027.pdf"><div><b>Fiche d'inscription</b><span>PDF · 330 ko · à imprimer</span></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-top:30px">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="eyebrow rv">Contact</span>
+      <h2 class="h2 rv d1">On danse ensemble ?</h2>
+      <p class="lead rv d2">Envie de nous rejoindre, de booker la troupe ou simplement de poser une question ? On vous répond dans les meilleurs délais.</p>
+      <div class="cinfo">
+        <a class="rv" href="tel:+33618263703"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><span><small>Téléphone</small>06 18 26 37 03</span></a>
+        <a class="rv d1" href="mailto:suenacubano@yahoo.fr"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span><span><small>Email · 7j/7</small>suenacubano@yahoo.fr</span></a>
+        <a class="rv d2" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=2+rue+Condorcet+33400+Talence"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span><small>Siège</small>2 rue Condorcet, 33400 Talence</span></a>
+      </div>
+      <div class="socials rv" style="margin-top:18px">
+        <a aria-label="Facebook" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=100057338744430"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.5V11H7v4h3v9h4v-9h3l1-4h-4V8.8c0-.5.3-.8 1-.8z"/></svg></a>
+        <a aria-label="Instagram" target="_blank" rel="noopener" href="https://www.instagram.com/suena_cubano/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+    <form class="rv d1" id="cform">
+      <h3>Écrivez-nous</h3>
+      <label>Prénom<input name="nom" required autocomplete="given-name"></label>
+      <label>Email<input name="email" type="email" required autocomplete="email"></label>
+      <label class="full">Sujet
+        <select name="sujet">
+          <option>Inscription à un cours</option>
+          <option>Cours d'essai</option>
+          <option>Stage ou événement</option>
+          <option>Prestation de la troupe</option>
+          <option>Autre question</option>
+        </select></label>
+      <label class="full">Message<textarea name="msg" required placeholder="Bonjour, je voudrais…"></textarea></label>
+      <button class="btn btn-primary" type="submit">Envoyer le message <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="hint">Ouvre votre messagerie avec le message prêt à partir.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <a href="#accueil" class="brand"><img src="img/logo.jpg" alt=""><span>Suena Cubano<small>Une culture, une association, une passion</small></span></a>
+      <nav><a href="#cours">Cours</a><a href="#planning">Planning</a><a href="#evenements">Événements</a><a href="#association">Association</a><a href="#inscriptions">Inscriptions</a><a href="#contact">Contact</a></nav>
+    </div>
+    <div class="copy"><span>© 2026 Suena Cubano · Association loi 1901 · Talence</span><span>Hecho con ♥ y sabor</span></div>
+  </div>
+</footer>
+
+<div class="mcta" id="mcta"><a class="btn btn-ghost" href="#planning">Planning</a><a class="btn btn-primary" href="#inscriptions">S'inscrire</a></div>
+<div class="lb" id="lb" role="dialog" aria-label="Affiche agrandie"><div class="row"></div></div>
+
+<script>
+(()=>{
+  const hd=document.querySelector('header'), mcta=document.getElementById('mcta');
+  const onScroll=()=>{const y=scrollY;hd.classList.toggle('scrolled',y>30);mcta.classList.toggle('on',y>innerHeight*.8)};
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // burger
+  const bg=document.querySelector('.burger');
+  bg.addEventListener('click',()=>{const o=hd.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
+  document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>{hd.classList.remove('open');bg.setAttribute('aria-expanded',false)}));
+})();
+</script>
+<script>
+(()=>{
+  // active nav link
+  const links=[...document.querySelectorAll('.menu a')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+  links.forEach(l=>{const s=document.querySelector(l.getAttribute('href'));s&&io.observe(s)});
+
+  // reveal
+  const rv=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rv.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(el=>rv.observe(el));
+
+  // tabs
+  const tabs=document.querySelectorAll('.tab');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.setAttribute('aria-selected',x===t));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='p-'+t.dataset.t));
+  }));
+
+  // countdown
+  const target=new Date('2026-10-31T14:00:00+01:00').getTime();
+  const cd=document.getElementById('cd');
+  const pad=n=>String(n).padStart(2,'0');
+  const tick=()=>{let d=Math.max(0,target-Date.now())/1000;
+    const v={d:Math.floor(d/86400),h:Math.floor(d%86400/3600),m:Math.floor(d%3600/60),s:Math.floor(d%60)};
+    for(const k in v)cd.querySelector(`[data-u="${k}"]`).textContent=k==='d'?v[k]:pad(v[k]);};
+  tick();setInterval(tick,1000);
+
+  // lightbox
+  const lb=document.getElementById('lb'),row=lb.querySelector('.row');
+  document.querySelectorAll('[data-lb]').forEach(el=>el.addEventListener('click',()=>{
+    row.innerHTML=el.dataset.lb.split(',').map(s=>`<img src="${s}" alt="">`).join('');lb.classList.add('on');}));
+  lb.addEventListener('click',()=>lb.classList.remove('on'));
+  addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+
+  // contact form → mailto
+  document.getElementById('cform').addEventListener('submit',e=>{
+    e.preventDefault();const f=new FormData(e.target);
+    const body=`${f.get('msg')}\n\n— ${f.get('nom')} (${f.get('email')})`;
+    location.href=`mailto:suenacubano@yahoo.fr?subject=${encodeURIComponent('[Site] '+f.get('sujet'))}&body=${encodeURIComponent(body)}`;
+  });
+})();
+</script>
+</body>
+</html>
